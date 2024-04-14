@@ -1,3 +1,6 @@
+{
+  /*Try nested page routing */
+}
 function UserPasswordSettingPage() {
   return (
     <div>
