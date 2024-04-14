@@ -1,5 +1,11 @@
+import LoginView from "@/views/Auth/Login";
+
 function LoginPage() {
-  return <></>;
+  return (
+    <>
+      <LoginView />
+    </>
+  );
 }
 
 export default LoginPage;

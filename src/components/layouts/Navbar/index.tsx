@@ -1,6 +1,8 @@
+import styles from "./Navbar.module.css";
+
 function Navbar() {
   return (
-    <div className="navbar">
+    <div className={styles.navbar}>
       <div>Navbar</div>
     </div>
   );
