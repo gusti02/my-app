@@ -3,7 +3,7 @@ import Link from "next/link";
 function RegisterPage() {
   return (
     <div>
-      <div>Register Page</div>
+      <h1>Register Page</h1>
       <p>
         Sudah punya akun? Login <Link href={"/auth/login"}>Di Sini</Link>
       </p>
