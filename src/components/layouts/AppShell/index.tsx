@@ -6,7 +6,7 @@ type AppShellProps = {
 };
 
 // this for disable navbar when auth login or register
-const disableNavbar = ["/auth/login", "/auth/register"];
+const disableNavbar = ["/auth/login", "/auth/register", "/404"];
 
 function AppShell(props: AppShellProps) {
   const { children } = props;
