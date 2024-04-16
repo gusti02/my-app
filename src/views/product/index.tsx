@@ -1,6 +1,7 @@
 import ProductViewSkeleton from "./Skeleton";
 import { ProductType } from "@/types/products.type";
 
+// this is client side rendering
 function ProductView(props: { products: ProductType[] }) {
   const { products } = props;
   return (
