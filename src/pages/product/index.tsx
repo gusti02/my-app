@@ -1,17 +1,11 @@
+import ProductView from "@/views/product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { fetcher } from "@/utils/swr/fetcher";
 
-type productType = {
-  id: number;
-  name: string;
-  price: number;
-  size: string;
-};
-
-{
-  /* Try to using dynamic routing  if the user is not logged in 
+/* Try to using dynamic routing  if the user is not logged in 
   will redirect to the login page*/
-}
 function ProductPage() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
@@ -27,23 +21,22 @@ function ProductPage() {
     }
   }, []);
 
+  const { data, error, isLoading } = useSWR("/api/product", fetcher);
+
   {
     /* this useEffect for fecthing data from API and set it to state setProducts */
   }
-  useEffect(() => {
-    fetch("/api/product")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/product")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setProducts(data.data);
+  //     });
+  // }, []);
 
   return (
     <div>
-      <h1>Product Page</h1>
-      {products.map((product: productType) => (
-        <div key={product.id}>{product.name}</div>
-      ))}
+      <ProductView products={isLoading ? [] : data.data} />
     </div>
   );
 }
