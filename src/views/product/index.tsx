@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductViewSkeleton from "./Skeleton";
 import { ProductType } from "@/types/products.type";
 
@@ -11,7 +12,11 @@ function ProductView(props: { products: ProductType[] }) {
         {products.length > 0 ? (
           <>
             {products.map((product: ProductType) => (
-              <div key={product.id} className="w-1/4 p-5">
+              <Link
+                href={`/product/${product.id}`}
+                key={product.id}
+                className="w-1/4 p-5"
+              >
                 <div className="">
                   <img src={product.image} alt={product.name} />
                 </div>
@@ -25,7 +30,7 @@ function ProductView(props: { products: ProductType[] }) {
                     maximumFractionDigits: 0,
                   })}
                 </p>
-              </div>
+              </Link>
             ))}
           </>
         ) : (
