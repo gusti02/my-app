@@ -8,18 +8,18 @@ import { fetcher } from "@/utils/swr/fetcher";
   will redirect to the login page*/
 function ProductPage() {
   const router = useRouter();
-  const [isLogin, setIsLogin] = useState(true);
+  // const [isLogin, setIsLogin] = useState(true);
   const [products, setProducts] = useState([]);
 
   {
     /* this useEffect is used to check if the user is logged in, if not, 
     will redirect to the login page */
   }
-  useEffect(() => {
-    if (!isLogin) {
-      router.push("/auth/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     router.push("/auth/login");
+  //   }
+  // }, []);
 
   const { data, error, isLoading } = useSWR("/api/product", fetcher);
 
