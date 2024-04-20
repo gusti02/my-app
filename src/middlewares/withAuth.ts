@@ -22,7 +22,6 @@ export default function withAuth(
         secret: process.env.NEXTAUTH_SECRET,
       });
 
-      console.log(token);
       // if no token, redirect to login
       if (!token) {
         const url = new URL("/auth/login", req.url);
