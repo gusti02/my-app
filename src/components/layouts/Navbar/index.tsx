@@ -7,8 +7,21 @@ function Navbar() {
   return (
     <div className={styles.navbar}>
       <div className="big">Navbar</div>
-      <div>
-        {data && data.user.fullname}{" "}
+      <div className="flex gap-3">
+        {data && data.user && (
+          <>
+            {data.user.image ? (
+              <img
+                className="w-8 h-8 rounded-full"
+                src={data.user.image}
+                alt={data.user.fullname}
+              />
+            ) : (
+              ""
+            )}
+            <div className="mt-1">{data.user.fullname} </div>
+          </>
+        )}
         {/* conditional rendering if data is not null,
          */}
         {data ? (

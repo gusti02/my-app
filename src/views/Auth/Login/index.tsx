@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Sign } from "crypto";
 import { signIn } from "next-auth/react";
 
 const LoginView = () => {
@@ -76,6 +75,12 @@ const LoginView = () => {
             </button>
           </div>
         </form>
+        <button
+          className="mt-3"
+          onClick={() => signIn("google", { callbackUrl, redirect: false })}
+        >
+          Sign in with Google
+        </button>
       </div>
       <p className="mt-2">
         Don{"'"}t Have an account? Sign up{" "}

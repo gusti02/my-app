@@ -1,11 +1,12 @@
 {
   /* Set up next-auth*/
 }
-import { signIn } from "@/utils/db/service";
+import { signIn, signInWithGoogle } from "@/utils/db/service";
 import { compare } from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 const authOptions: NextAuthOptions = {
   session: {
@@ -13,6 +14,8 @@ const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
+    // Add more providers here to configure them with the providers option
+    // this is using the credentials provider
     CredentialsProvider({
       type: "credentials",
       credentials: {
@@ -40,9 +43,14 @@ const authOptions: NextAuthOptions = {
         }
       },
     }),
+    // this is using google provider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
+    }),
   ],
   callbacks: {
-    jwt({ token, account, user }: any) {
+    async jwt({ token, account, user }: any) {
       // Add user information and credentials to the token
       // If acoount provider is "credentials" and then token
       //will have email, fullname and role return token
@@ -51,7 +59,26 @@ const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.role = user.role;
       }
-      console.log(token);
+      if (account?.provider === "google") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: "google",
+        };
+
+        await signInWithGoogle(
+          data,
+          (result: { status: boolean; message: string; data: any }) => {
+            if (result.status) {
+              token.email = result.data.email;
+              token.fullname = result.data.fullname;
+              token.type = result.data.type;
+              token.image = result.data.image;
+            }
+          }
+        );
+      }
       return token;
     },
     async session({ session, token }: any) {
@@ -63,10 +90,12 @@ const authOptions: NextAuthOptions = {
       if ("fullname" in token) {
         session.user.fullname = token.fullname;
       }
+      if ("image" in token) {
+        session.user.image = token.image;
+      }
       if ("role" in token) {
         session.user.role = token.role;
       }
-      console.log(token, session);
       return session;
     },
   },
