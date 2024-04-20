@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductViewSkeleton from "./Skeleton";
 import { ProductType } from "@/types/products.type";
+import Image from "next/image";
 
 // this is client side rendering
 function ProductView(props: { products: ProductType[] }) {
@@ -17,8 +18,14 @@ function ProductView(props: { products: ProductType[] }) {
                 key={product.id}
                 className="w-1/4 p-5"
               >
-                <div className="">
-                  <img src={product.image} alt={product.name} />
+                <div>
+                  {/* <img src={product.image} alt={product.name} /> */}
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={500}
+                    height={500}
+                  />
                 </div>
                 <h4 className="font-bold text-lg">{product.name}</h4>
                 <p className="text-gray-500 text-lg">{product.category}</p>

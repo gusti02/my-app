@@ -103,8 +103,9 @@ export async function signInWithGoogle(userData: any, callback: any) {
     id: doc.id,
     ...doc.data(),
   }));
+
+  // if user sing in with google and email exist then will update the database
   if (data.length > 0) {
-    console.log(data);
     userData.role = data[0].role;
     await updateDoc(doc(firestore, "users", data[0].id), userData).then(() => {
       callback({
@@ -116,6 +117,7 @@ export async function signInWithGoogle(userData: any, callback: any) {
       });
     });
   } else {
+    // if not userData not exist then will add the userData to the database
     userData.role = "member";
     await addDoc(collection(firestore, "users"), userData)
       .then(() => {
