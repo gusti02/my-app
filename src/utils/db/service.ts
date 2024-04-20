@@ -34,6 +34,24 @@ export async function retriveDataById(collectionName: string, id: string) {
   return data;
 }
 
+// This function will be used in login page
+export async function signIn(userData: { email: string }) {
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", userData.email)
+  );
+  const snapshot = await getDocs(q);
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  if (data) {
+    return data[0];
+  } else {
+    return null;
+  }
+}
+
 // this export function will be used in Register Page
 export async function signUp(
   userData: {

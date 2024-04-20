@@ -1,15 +1,10 @@
-{
-  /* This middleware will validate when user not logged 
-  in will be redirected to the login page */
-}
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import withAuth from "./middlewares/withAuth";
 
-export function mainMiddleware(request: NextRequest) {
+export function mainMiddleware(req: NextRequest) {
   const res = NextResponse.next();
   return res;
 }
 
-export default withAuth(mainMiddleware, ["/profile"]);
+export default withAuth(mainMiddleware, ["/profile", "/admin"]);
