@@ -1,4 +1,4 @@
-import RegisterView from "@/views/auth/Register";
+import RegisterView from "@/views/Auth/Register";
 
 function RegisterPage() {
   return (
