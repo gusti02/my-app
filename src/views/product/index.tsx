@@ -10,9 +10,9 @@ function ProductView(props: { products: ProductType[] }) {
     <div className="w-full px-8">
       <h1 className="text-center font-bold text-2xl">Product</h1>
       <div className="flex px-5">
-        {products.length > 0 ? (
+        {products?.length > 0 ? (
           <>
-            {products.map((product: ProductType) => (
+            {products?.map((product: ProductType) => (
               <Link
                 href={`/product/${product.id}`}
                 key={product.id}
