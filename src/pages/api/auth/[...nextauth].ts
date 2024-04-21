@@ -75,10 +75,12 @@ const authOptions: NextAuthOptions = {
               token.fullname = result.data.fullname;
               token.type = result.data.type;
               token.image = result.data.image;
+              token.role = result.data.role;
             }
           }
         );
       }
+      console.log(token);
       return token;
     },
     async session({ session, token }: any) {
@@ -96,6 +98,7 @@ const authOptions: NextAuthOptions = {
       if ("role" in token) {
         session.user.role = token.role;
       }
+      console.log(session);
       return session;
     },
   },
