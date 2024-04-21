@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+// this is ResisterView
 const RegisterView = () => {
   // useState for form and handle submit
   const [isLoading, setIsLoading] = useState(false);
