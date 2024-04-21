@@ -1,4 +1,4 @@
-import LoginView from "../../views/auth/login";
+import LoginView from "../../views/auth/Login";
 
 function LoginPage() {
   return (

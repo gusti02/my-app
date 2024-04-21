@@ -1,5 +1,4 @@
-import RegisterView from "@/views/auth/register";
-import Link from "next/link";
+import RegisterView from "@/views/auth/Register";
 
 function RegisterPage() {
   return (
