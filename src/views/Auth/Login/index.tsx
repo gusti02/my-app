@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 
-const LoginView = () => {
+function LoginView() {
   // useState for form and handle submit
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -90,6 +90,6 @@ const LoginView = () => {
       </p>
     </div>
   );
-};
+}
 
 export default LoginView;
